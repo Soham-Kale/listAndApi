@@ -1,6 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 
 
+const INITIAL_DATA = Array.from({ length: 20 }, (_, index) => ({
+    id: index.toString(),
+    title: `Item ${index + 1}`,
+}))
+
 const PullToRefresh = () => {
     return <View style={styles.container}>
         <Text style={styles.header}>Large list with pull to refresh and infinite scroll</Text>
