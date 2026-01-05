@@ -1,5 +1,5 @@
 import React from "react";
-import { SectionList, Text, View } from "react-native";
+import { SectionList, StyleSheet, Text, View } from "react-native";
 
 const SECTION_DATA = [
     {
@@ -20,7 +20,7 @@ const SECTION_DATA = [
 const SectionListScreen: React.FC = () => {
 
     const handleRenderItems = ({item}: {item: string}) => (
-        <View>
+        <View style={styles.item}>
             <Text>{item}</Text>
         </View>
     )
@@ -30,13 +30,13 @@ const SectionListScreen: React.FC = () => {
     }: {
         section: { title: string };
     }) => (
-        <View>
-            <Text>{title}</Text>
+        <View style={styles.sectionHeader}>
+            <Text style={styles.sectionHeaderText}>{title}</Text>
         </View>
     )
 
-    return <View>
-        <Text>Section List Screen</Text>
+    return <View style={styles.conatiner}>
+        <Text style={styles.header}>Section List Screen</Text>
         <SectionList
             renderSectionHeader={handleRenderSectionHeader}
             sections={SECTION_DATA}
@@ -45,5 +45,29 @@ const SectionListScreen: React.FC = () => {
         />
     </View>
 }
+
+const styles = StyleSheet.create({
+    conatiner: {
+        flex: 1,
+        padding: 15
+    },
+    header: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    item: {
+        padding: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#eeee',
+    },
+    sectionHeader: {
+        backgroundColor: '#f0f0f0',
+        padding: 5,
+    },
+    sectionHeaderText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    }
+})
 
 export default SectionListScreen;
