@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet, Text, View } from "react-native";
 
 interface Post {
     id: number;
@@ -7,7 +7,6 @@ interface Post {
 }
 
 const DataFeatching = () => {
-
     const [data, setData] =  useState<Post[]>([]);
     const [loading, setLoading] = useState(false);
 
@@ -35,11 +34,9 @@ const DataFeatching = () => {
         featchPostdata();
     }, []);
 
-    console.log(data);
-
     const handleRenderItem = ({item}: {item: Post}) => (
         <View style={styles.items}>
-            <Text>{item.title}</Text>
+            <Text style={styles.title}>{item.title}</Text>
         </View>
     )
 
@@ -47,11 +44,18 @@ const DataFeatching = () => {
         <View style={styles.container}>
             <Text style={styles.header}>Data Featching</Text>
 
-            <FlatList
-                data={data}
-                renderItem={handleRenderItem}
-                keyExtractor={item => item.id.toString()}
-            />
+            {
+                loading ? (
+                    <ActivityIndicator size={'large'} color={'#000fff'} /> 
+                ) : (
+                    <FlatList
+                        data={data}
+                        renderItem={handleRenderItem}
+                        keyExtractor={item => item.id.toString()}
+                    />
+                )
+            }
+
         </View>
     )
 };
@@ -68,7 +72,14 @@ const styles = StyleSheet.create({
     items: {
         padding: 10,
         borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
+        marginVertical: 8,
+        marginHorizontal: 16,
+        backgroundColor: '#c8dd0dff',
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#000000',
     }
 });
 
