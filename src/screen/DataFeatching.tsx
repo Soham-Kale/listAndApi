@@ -24,7 +24,6 @@ const DataFeatching = () => {
                 setData([]);
                 setLoading(false);
             }
-
         } catch(e) {
             console.error(e);
         }
